@@ -2,7 +2,7 @@ import React from 'react';
 import Button from "./Button";
 import Home from "./Home";
 import '../App.css';
-//import axios from 'axios';
+
 class TeacherHome extends React.Component
 {
     constructor(props)
@@ -35,13 +35,6 @@ class TeacherHome extends React.Component
     {  
        
         this.props.history.push("/ListOfStudents")
-    //    axios.get("http://localhost:8080/ListOfStudents").then(res => 
-    //    {
-    //           alert("Received Successful response from server!");
-    //     }, err => {
-    //      alert("Server rejected response with: " + err);
-    //    });
-        
     }
     handleNewStudent()
     {

@@ -7,7 +7,6 @@ import ListOfStudents from './StudentManagement/ListOfStudents'
 import AddNewStudent from './StudentManagement/AddNewStudent'
 import EditStudent from './StudentManagement/EditStudent'
 import DeleteStudent from './StudentManagement/DeleteStudent'
-import axios from 'axios'
 import './App.css';
 
 class App extends Component
@@ -18,20 +17,6 @@ class App extends Component
     this.state={isLoaded:true};
   }
   
-  
-  componentDidMount()
-  {
-    this.setState({isLoaded:true});
-     fetch("http://localhost:8080/LoginPage")
-     .then(res =>res.json())
-     .then(
-       ()=>{
-         this.setState({
-           isLoaded:false,
-         });
-       }
-     )
-  }
   render() 
   {
     const {isLoaded}=this.state;
@@ -61,36 +46,9 @@ class App extends Component
     </div> 
     );
   }
+  else
+  {
+    alert("Not connected spring url")}
   }
 }
 export default App;
-
-
-/*
-
- return(
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome To Student Management System</h1>
-        </header>  
-      <Login></Login>
-      <Router>
-        <div>
-          <ul> 
-            <Link to = "/">Home</Link> <br/>
-            <Link to = "/Registration">Registration</Link>
-          </ul>
-          <Switch>     
-            <Route exact path='/Registration' component={Registration} />
-          </Switch>
-        </div>
-      </Router>
-      <TeacherHome></TeacherHome>
-      <AddNewStudent></AddNewStudent>
-      <footer className="App-Footer">
-        <h6>This is a student management System site</h6>
-      </footer>
-      </div>
-    );
-
-*/

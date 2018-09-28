@@ -10,8 +10,10 @@ class AddNewStudent extends React.Component
         super(props)
         this.state={FirstName:" ",LastName:" ",Class:" ",
                     Division:" ",AddressLine1:" ",
-                    AddressLine2:" ",pincode:"",firstNameValid:false,
+                    AddressLine2:" ",pincode:"",
+                    firstNameValid:false,
                     lastNameValid:false,
+                    classNameValid:false,
                     divisionValid: false,
                     addressLine1Valid:false,
                     pincodeValid:false,
@@ -30,10 +32,12 @@ class AddNewStudent extends React.Component
     }
     handleFirstNameChange(value)
     {
+        let FirstNmValid = this.state.firstNameValid;
         if(value!=="")
         {
+            FirstNmValid = value.match(/^[a-zA-Z]+$/);
+            this.setState({ErrfirstName:FirstNmValid ? '' : ' Only letters'});
             this.setState({FirstName: value});
-            this.setState({ErrfirstName:""});
         }
         else{
             this.setState({ErrfirstName:"*First Name is required"});
@@ -42,21 +46,25 @@ class AddNewStudent extends React.Component
     }
     handleLastNameChange(value)
     {
+        let LastNmValid = this.state.lastNameValid;
         if(value!=="")
         {
+            LastNmValid = value.match(/^[a-zA-Z]+$/);
+            this.setState({ErrlastName:LastNmValid ? '' : '  Only letters'});
             this.setState({LastName: value});
-            this.setState({ErrlastName:""});
         }
         else{
-            this.setState({ErrfirstName:"*Last Name is required"});
+            this.setState({ErrlastName:"*Last Name is required"});
         }
     }
     handleClassChange(value)
     {
+        let classNmValid=this.state.classNameValid;
         if(value!=="")
         {
+            classNmValid=value.match(/^[a-zA-Z0-9]+$/);
+            this.setState({ErrClass:classNmValid? '' : 'Invalid'});
             this.setState({Class: value});
-            this.setState({ErrClass:""});
         }
         else{
             this.setState({ErrClass:"*Class is required"});
@@ -64,10 +72,13 @@ class AddNewStudent extends React.Component
     }
     handleDivisionChange(value)
     {
+        let divVlid=this.state.divisionValid;
         if(value!=="")
         {
+            divVlid=value.match(/^[a-zA-Z]$/);
+            this.setState({Errdivision:divVlid? '':'Only single character'});
             this.setState({Division: value});
-            this.setState({Errdivision:""});
+            
         }
         else{
             this.setState({Errdivision:"*Division is required"});
@@ -75,10 +86,12 @@ class AddNewStudent extends React.Component
     }
     handleAddressLine1Change(value)
     {
+        let addressLine1Valid=this.state.addressLine1Valid;
         if(value!=="")
         {
+            addressLine1Valid = value.length <= 22;
+            this.setState({ErraddressLine1:addressLine1Valid ? '' : ' Too long use Line2'});
             this.setState({AddressLine1: value});
-            this.setState({ErraddressLine1:""});
         }
         else{
             this.setState({ErraddressLine1:"*Address is required"});
@@ -90,10 +103,12 @@ class AddNewStudent extends React.Component
     }
     handlePincodeChange(value)
     {
+        let pincodeValid = this.state.pincodeValid;
         if(value!=="")
         {
+            pincodeValid = value.match(/^[0-9]+$/);
+            this.setState({Errpincode:pincodeValid ? '' : '  Only numbers'});
             this.setState({pincode: value});
-            this.setState({Errpincode:""});
         }
         else{
             this.setState({Errpincode:"*PIN Code is required"});
@@ -121,10 +136,27 @@ class AddNewStudent extends React.Component
     }
     handleAddStudent()
     {
+        const fname = this.state.FirstName;
+        const lname = this.state.LastName;
+        const classs = this.state.Class;
+        const division= this.state.Division;
+        const line1 = this.state.AddressLine1;
+        const line2 = this.state.AddressLine2;
+        const pin = this.state.pincode;
         if(this.state.FirstName!=="" && this.state.LastName!==""&&this.state.Class!=="" && this.state.Division!==""&&this.state.AddressLine1!=="" && this.state.pincode!=="")
         {
+           if(
+               fetch('http://localhost:8080/addStudent?firstName='+fname+
+            '&lastName='+lname+'&TeacherID='+1+'&classs='+classs+'&division='+division+'&line1='+line1 +
+            '&line2='+ line2+'&pinCode='+pin,
+            {method:'GET',mode:"no-cors"})
+            .then(resp => resp)
+            .then(findResp => this.setState({data:findResp}))
+           ){
             alert("Added "+ this.state.FirstName);
-            this.props.history.push('/ListOfStudents');
+            this.props.history.push('/ListOfStudents');   
+           }
+            
         }
         else
         {

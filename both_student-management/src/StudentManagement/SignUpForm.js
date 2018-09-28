@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import {FormErrors} from './FormErrors.js'
-//import './Form.css';
-class SignUpForm extends Component {
+import Button from './Button';
+
+class SignUpForm extends Component 
+{
   constructor(props){
     super(props);
     this.state = {
@@ -16,9 +18,10 @@ class SignUpForm extends Component {
         formErrors:{FirstName:'',LastName:'',userNm:'',passWord:''},
         formValid:false
     }
-   // this.onBackClick=this.onBackClick.bind(this);
     this.handleUserInput = this.handleUserInput.bind(this)
-}
+    this.handleBack=this.handleBack.bind(this);
+  }
+
 handleUserInput = (e) => {
   const name = e.target.name;
   const value = e.target.value;
@@ -70,6 +73,11 @@ validateForm() {
 errorClass(error) {
   return(error.length === 0 ? '' : 'has-error');
 }
+handleBack()
+{
+    console.log("back");
+    this.props.history.push('/')
+}
 
       render(){
         return(
@@ -102,8 +110,9 @@ errorClass(error) {
                             value={this.state.value}
                             onChange={this.handleUserInput}/>
                     </div>
-                    
+                    <Button buttonName="Home" handleOnClick={this.handleBack}/>
                     <button type="submit" onClick={this.props.onSubmitClick}disabled={!this.state.formValid}>Sign up</button>
+                    
                 </form>
         )
     }

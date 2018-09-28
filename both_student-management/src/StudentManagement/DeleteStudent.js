@@ -17,7 +17,7 @@ class DeleteStudent extends React.Component
             <div>
                 {alert("Student Deleted")}
                 {this.handleBack()} 
-                </div>
+            </div>
         );
     }
 }
