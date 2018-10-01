@@ -101,30 +101,30 @@ public class MainController
 	
 	
 	@GetMapping(path="/updateStudent")
-	public String updateStudent(@RequestBody Student student, @RequestParam int id)
-	//public String updateStudent(@RequestParam int id,@RequestParam String firstName, @RequestParam String lastName,@RequestParam String classs, @RequestParam String division,@RequestParam String line1, @RequestParam String line2,@RequestParam int pinCode)
+    public String updateStudent(@RequestParam int id,@RequestParam String firstName, @RequestParam String lastName,@RequestParam int TeacherId,
+    		@RequestParam String classs, @RequestParam String division,@RequestParam String line1, @RequestParam String line2,@RequestParam String pinCode)
 	{
-		String notFound =ResponseEntity.notFound().build().toString();
-		System.out.println("updating student....");
-		Student updateStudent = new Student();
-		Optional<Student> studentOptional = studentRepository.findById(id);
-		if (!studentOptional.isPresent())
-		{
-			return notFound;
-		}
-		else{
-		studentRepository.findById(id);
-		updateStudent.setId(id);
-		/*updateStudent.setFirstName(firstName);
-		updateStudent.setLastName(lastName);
-		updateStudent.setClasss(classs);
-		updateStudent.setDivv(division);
-		updateStudent.setLine1(line1);
-		updateStudent.setLine2(line2);
-		updateStudent.setPin(pinCode);*/
-		studentRepository.save(updateStudent);
-		}
-		return "Student updated......";
-	}
-	
+    String notFound =ResponseEntity.notFound().build().toString();
+    System.out.println("updating student....");
+    Student updateStudent = new Student();
+    Optional<Student> studentOptional = studentRepository.findById(id);
+    if (!studentOptional.isPresent())
+    {
+                    return notFound;
+    }
+    else{
+    studentRepository.findById(id);
+    updateStudent.setstudentId(id);
+    updateStudent.setFirstName(firstName);
+    updateStudent.setLastName(lastName);
+    updateStudent.setTeacherId(TeacherId);
+    updateStudent.setStudentClass(classs);
+    updateStudent.setDivision(division);
+    updateStudent.setAddressLine1(line1);
+    updateStudent.setAddressLine2(line2);
+    updateStudent.setPINcode(pinCode);
+    studentRepository.save(updateStudent);
+    }
+    return "Student updated......";
+    }
 }

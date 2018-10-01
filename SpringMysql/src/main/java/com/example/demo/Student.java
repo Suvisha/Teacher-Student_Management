@@ -24,7 +24,7 @@ public class Student implements Serializable
 	@Id
 	@GeneratedValue
 	@Column(name="StudentID")
-	private Integer id;
+	private Integer studentId;
 	
 	@Column(name="firstName")
 	private String firstName;
@@ -50,12 +50,12 @@ public class Student implements Serializable
 	@Column(name="PinCode")
     private String pincode;
 	
-	public Integer getId() {
-        return id;
+	public Integer getstudentId() {
+        return studentId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setstudentId(Integer studentId) {
+        this.studentId = studentId;
     }
 
     public String getFirstName() {
