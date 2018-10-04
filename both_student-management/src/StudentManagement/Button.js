@@ -16,7 +16,7 @@ class Button extends React.Component
     {
       return(
           <div >
-            <input type="button"  className="buttonProp" onClick={this.handleOnClick} value={this.props.buttonName} ></input>
+            <input type="button"  className="buttonProp" onClick={this.handleOnClick} value={this.props.buttonName} disabled={this.props.disable} ></input>
             <div> <label className="label"> {this.props.error} </label></div>
           </div>
       );

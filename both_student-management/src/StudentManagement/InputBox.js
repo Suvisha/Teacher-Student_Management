@@ -15,10 +15,12 @@ class InputBox extends React.Component
     render()
     {
         return(      
-            <div >     
+            <div >   
+                   <label> {this.props.Name}: </label>  
                 <div>
-                    <input type={this.props.inputType} placeholder= {this.props.placeholder} onBlur={this.handleOnChange} 
-                           name={this.props.Name} defaultValue={this.props.value} required/>
+                    <input id={this.props.id} type={this.props.inputType} placeholder= {this.props.placeholder} 
+                            onBlur={this.handleOnChange} 
+                            name={this.props.Name} defaultValue={this.props.value} required/>
                 </div>
                 <div> <label className="label"> {this.props.error} </label></div>
             </div>

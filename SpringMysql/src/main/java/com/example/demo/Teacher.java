@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="teacherinfo")
+@Table(name="teacher_info")
 
 @NamedStoredProcedureQueries({
 	@NamedStoredProcedureQuery( name="sp_GetTeacher",

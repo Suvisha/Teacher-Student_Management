@@ -40,22 +40,13 @@ class EditStudent extends React.Component
     {
         
     }
-    componentDidMount()
-    {
-        // const {FirstName} = this.props
-        // this.setState({FirstName:FirstName})
-    }
-   /*studentToUpdate(student){
-        this.setState({studentData:this.props.ListOfStudents.student})
-        this.setState({studentID:this.state.student.studentID})
-    }*/
     handleFirstNameChange(value)
     { 
         let FirstNmValid = this.state.firstNameValid;
         if(value!=="")
         {
-            FirstNmValid = value.match(/^[a-zA-Z]+$/);
-            this.setState({ErrfirstName:FirstNmValid ? '' : ' Only letters'});
+            FirstNmValid = value.match(/^[a-zA-Z'. -]+$/);
+            this.setState({ErrfirstName:FirstNmValid ? '' : ' Only: letters\' . -',});
             this.setState({FirstName: value});
         }
         else{
@@ -67,22 +58,21 @@ class EditStudent extends React.Component
         let LastNmValid = this.state.lastNameValid;
         if(value!=="")
         {
-            LastNmValid = value.match(/^[a-zA-Z]+$/);
-            this.setState({ErrlastName:LastNmValid ? '' : '  Only letters'});
+            LastNmValid = value.match(/^[a-zA-Z'. -]+$/);
+            this.setState({ErrlastName:LastNmValid ? '' : ' Only: letters\' . -'});
             this.setState({LastName: value});
         }
         else{
             this.setState({ErrlastName:"*Last Name is required"});
         }
-
     }
     handleClassChange(value)
     { 
         let classNmValid=this.state.classNameValid;
         if(value!=="")
         {
-            classNmValid=value.match(/^[a-zA-Z0-9]+$/);
-            this.setState({ErrClass:classNmValid? '' : 'Invalid'});
+            classNmValid=value.match(/^[a-zA-Z0-9'. -]+$/);
+            this.setState({ErrClass:classNmValid? '' : 'Only: letters\' . - 0-9'});
             this.setState({Class: value});
         }
         else{
@@ -152,11 +142,13 @@ class EditStudent extends React.Component
             {method:'GET',mode:"no-cors"})
             .then(resp => resp)
             .then(findResp => this.setState({data:findResp}))
-           ){
+           )
+           {
             alert("Updated "+ this.state.FirstName);
-            this.setState({referrer:'/ListOfStudents'})   
-           }
-            
+            //this.setState({referrer:'/ListOfStudents'})  
+            //this.props.history.push('/ListOfStudents')
+            window.location.reload(); 
+           }    
         }
         else
         {
@@ -165,8 +157,7 @@ class EditStudent extends React.Component
     }
     handleBack()
     {
-       // this.props.history.push('/ListOfStudents');
-       this.setState({referrer:'/ListOfStudents'})
+        window.location.reload();
     }
     render()
     {
@@ -178,21 +169,20 @@ class EditStudent extends React.Component
             <h2> Student To be edit:  {this.props.studentToUpdate.firstName} </h2>
             </div> 
                 <form>
-
-                    <InputBox inputType="text"  placeholder="First Name"    value={this.props.studentToUpdate.firstName}    
-                              handleChanges={this.handleFirstNameChange}    Name="firstName"   error={this.state.ErrfirstName} /><br></br> 
+                    <InputBox inputType="text"  placeholder="First Name"    value={this.state.FirstName}    
+                              handleChanges={this.handleFirstNameChange}    Name="firstName"   error={this.state.ErrfirstName} /><br/>
                     <InputBox inputType="text"  placeholder="Last Name"     value={this.props.studentToUpdate.lastName}     
-                              handleChanges={this.handleLastNameChange}     Name="lastName"    error={this.state.ErrlastName} /><br></br>           
+                              handleChanges={this.handleLastNameChange}     Name="lastName"    error={this.state.ErrlastName} /><br/>          
                     <InputBox inputType="text"  placeholder="Class"         value={this.props.studentToUpdate.studentClass}        
-                              handleChanges={this.handleClassChange}        Name="class"       error={this.state.ErrClass} /><br></br>           
+                              handleChanges={this.handleClassChange}        Name="class"       error={this.state.ErrClass} /><br/>         
                     <InputBox inputType="text"  placeholder="Division"      value={this.props.studentToUpdate.division}     
-                              handleChanges={this.handleDivisionChange}     Name="division"    error={this.state.Errdivision} /><br></br>           
+                              handleChanges={this.handleDivisionChange}     Name="division"    error={this.state.Errdivision} /><br/>          
                     <InputBox inputType="text"  placeholder="Address Line1" value={this.props.studentToUpdate.addressLine1} 
-                              handleChanges={this.handleAddressLine1Change} Name="addressLine1"error={this.state.ErraddressLine1} /><br></br>           
+                              handleChanges={this.handleAddressLine1Change} Name="addressLine1"error={this.state.ErraddressLine1} /><br/>
                     <InputBox inputType="text"  placeholder="Address Line2" value={this.props.studentToUpdate.addressLine2} 
-                              handleChanges={this.handleAddressLine2Change} Name="addressLine2"                                   /><br></br>           
+                              handleChanges={this.handleAddressLine2Change} Name="addressLine2"                               /><br/>
                     <InputBox inputType="text"  placeholder="PIN code"      value={this.props.studentToUpdate.pincode}      
-                              handleChanges={this.handlePincodeChange}      Name="pincode"     error={this.state.Errpincode} /><br></br>           
+                              handleChanges={this.handlePincodeChange}      Name="pincode"     error={this.state.Errpincode} /><br/>           
                     <Button buttonName="Edit Student" handleOnClick={this.handleEditStudent} error={this.state.ErrButton}/>
                     <Button buttonName="Back" handleOnClick={this.handleBack}/>
                 </form>   

@@ -17,6 +17,7 @@
     "react-router-redux": "^4.0.8",
     "react-scripts": "1.1.5",
     "react-validation": "^3.0.7",
+    "reactjs-localstorage": "0.0.7",
     "redux": "^4.0.0",
     "validator": "^10.7.1"
   },

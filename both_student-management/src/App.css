@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
+}
 .App {
   text-align: center;
 }
@@ -25,10 +29,6 @@
   font-size: 1.5em;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 .input[type=text], select, textarea {
   width: 80%;
   padding: 8px;
@@ -41,8 +41,6 @@
   padding: 8px;
   display: inline;
 }
-
-
 .container {
   border-radius: 5px;
   background-color: #f2f2f2;

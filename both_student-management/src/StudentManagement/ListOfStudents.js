@@ -89,13 +89,14 @@ class ListOfStudents extends React.Component
                             <th>ID</th>
                             <th>First Name</th>
                             <th>Last Name</th>
-                            <th>TeacherID</th>
+                            {/* <th>TeacherID</th> */}
                             <th>class</th>
                             <th>division</th>
                             <th>AddressLine1</th>
                             <th>AddressLine2</th>
                             <th>pinCode</th>
-                            <th>operations</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     {
                         this.state.students.map((student,index)=>{
@@ -104,16 +105,14 @@ class ListOfStudents extends React.Component
                                 <td>{student.studentId}</td>
                                 <td>{student.firstName}</td>
                                     <td>{student.lastName}</td>
-                                    <td>{student.teacherId}</td>
+                                    {/* <td>{student.teacherId}</td> */}
                                     <td>{student.studentClass}</td>
                                     <td>{student.division}</td>
                                     <td>{student.addressLine1}</td>
                                     <td>{student.addressLine2}</td>
                                     <td>{student.pincode}</td>
-                                    <td>
-                                    <button className="btn btn-primary btn-xs" onClick={() => this.handleEditClicked(student)}>Edit</button>
-                                    <button className="btn btn-primary btn-xs" onClick={() => this.handleDeleteClicked(student)}>Delete</button>
-                                    </td>
+                                    <td><Button buttonName="Edit" handleOnClick={() => this.handleEditClicked(student)}/></td>
+                                    <td><Button buttonName="Delete" handleOnClick={() => this.handleDeleteClicked(student)}/></td>
                                 </tr>
                             ) 
                         })    
