@@ -3,6 +3,10 @@ import Button from "./Button";
 import Home from "./Home";
 import '../App.css';
 import { Redirect } from 'react-router-dom';
+import {connect} from 'react-redux'
+import ListOfStudents from './ListOfStudents'
+import AddNewStudent from './AddNewStudent'
+import Login from './LoginPage'
 
 class TeacherHome extends React.Component
 {
@@ -22,27 +26,43 @@ class TeacherHome extends React.Component
     }
     handleListOfStudents()
     {    
-      this.setState({referrer:'/ListOfStudents'})
+      this.setState({listOfStudentsCalled:!this.state.listOfStudentsCalled})
     }
     handleNewStudent()
     {
-      this.setState({referrer:'/AddNewStudent'})
+      this.setState({addNewStudentCalled:!this.state.addNewStudentCalled})
     }
-    handleLogOut()
+    handleLogOut= async event =>
     {
-      this.setState({referrer:'/'})
+        const logout = this.props.teachers[0]
+        this.props.dispatch({
+            type:'LOGOUT',
+            logout})
+        this.setState({logOutCalled:!this.state.logOutCalled})
     }
     render()
     {
       const{referrer}=this.state
+      const {listOfStudentsCalled}=this.state;
+      const {addNewStudentCalled}=this.state;
+      const {logOutCalled}=this.state;
       if(referrer)
       {
-        return <Redirect to={referrer}></Redirect>
+          return <Redirect to={referrer}></Redirect>
+      }
+      if(listOfStudentsCalled){
+          return <ListOfStudents></ListOfStudents>
+      }
+      if(addNewStudentCalled){
+          return <AddNewStudent teacherId={this.props.teachers.teacherID}></AddNewStudent>
+      }
+      if(logOutCalled){
+          return <Login></Login>
       }
       return(
         <div id ="TeacherHome" className="col-75 ">
             <div className="right">  
-                {/* <h2> Name:{this.props.teacherData.firstName} {this.props.teacherData.lastName}</h2> */}
+                <h2>{this.props.teachers.firstName} {this.props.teachers.lastName}</h2>
             </div>
             <div className="center">
                 <Home/>
@@ -56,4 +76,9 @@ class TeacherHome extends React.Component
       );
     }
 }
-export default TeacherHome;
+const mapStateToProps = (state) => {
+  return{
+      teachers:state.LoginReducer[0]
+  }
+}
+export default connect (mapStateToProps) (TeacherHome);

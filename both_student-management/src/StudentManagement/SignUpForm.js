@@ -78,9 +78,7 @@ class SignUpForm extends Component
   }
   handleBack()
   {
-      console.log("back");
       this.setState({referrer:'/'})
-      //this.props.history.push('/')
   }
   render()
   {
@@ -96,22 +94,22 @@ class SignUpForm extends Component
             <FormErrors formErrors={this.state.formErrors} />
         </div>
         <div className={`form-group ${this.errorClass(this.state.formErrors.FirstName)}`}>
-            <label htmlFor="_FirstName">First Name: </label>
+            <label htmlFor="_FirstName">First Name &nbsp;&nbsp;: </label>
             <input id="name" type="text" size="15" placeholder="First Name" name="FirstName"  required
                 value={this.state.value} onChange={this.handleUserInput}/>                           
-        </div>
+        </div><br/>
         <div className={`form-group ${this.errorClass(this.state.formErrors.LastName)}`}>
-            <label htmlFor="_LastName">Last Name: </label>
+            <label htmlFor="_LastName">Last Name&nbsp;&nbsp;&nbsp;: </label>
             <input id="lastName" type="text" size="15" placeholder="last name" name="LastName" required
                 value={this.state.value} onChange={this.handleUserInput} />
-        </div>
+        </div><br/>
         <div className={`form-group ${this.errorClass (this.state.formErrors.userNm)}`}>
-            <label htmlFor="_UserName">User Name:</label>
+            <label htmlFor="_UserName">User Name &nbsp;: </label>
             <input id="user" type="text" size="15" placeholder="User Name" name="userNm" required
                 value={this.state.value} onChange={this.handleUserInput}/>
-        </div>
+        </div><br/>
         <div className={`form-group ${this.errorClass(this.state.formErrors.passWord)}`}>      
-            <label htmlFor="_password">Password: </label>
+            <label htmlFor="_password">Password&nbsp;&nbsp;&nbsp;&nbsp;: </label>
             <input id="pass_word" type="password" size="15" placeholder="New password" name="passWord" required
                 value={this.state.value} onChange={this.handleUserInput}/>
         </div> <br/><br/>

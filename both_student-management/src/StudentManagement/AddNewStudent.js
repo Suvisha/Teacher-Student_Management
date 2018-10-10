@@ -1,9 +1,8 @@
 import React from 'react';
-//import InputBox from './InputBox';
 import {FormErrors} from './FormErrors.js'
-// import Button from './Button';
 import { Redirect } from 'react-router-dom';
 import '../App.css';
+import TeacherHome from './TeacherHome.js';
 
 class AddNewStudent extends React.Component
 {
@@ -17,7 +16,7 @@ class AddNewStudent extends React.Component
                     lastNameValid:false,
                     classNameValid:false,
                     divisionNmValid: false,
-                    addressLine1Valid:false,
+                    addressLine1Valid:false,handleBackCalled:false,
                     pincodeValid:false,formValid:false,
                     ErrButton:"",
                     formErrors:{FirstName:'',LastName:'',Class:'',Division:'',Address:'',PINcode:''}
@@ -47,12 +46,10 @@ class AddNewStudent extends React.Component
             case 'FirstName':
                 FirstNmValid = value.match(/^[a-zA-Z'. -]+$/);
                 fieldValidationErrors.FirstName = FirstNmValid ? '' : ' is invalid';
-                // if(fieldValidationErrors.FirstNm==='')
-                // this.setState({FirstName: value});
             break;
             
             case 'LastName':
-                LastNmValid = value.match(/^[a-zA-Z]+$/);
+                LastNmValid = value.match(/^[a-zA-Z'. -]+$/);
                 fieldValidationErrors.LastName = LastNmValid ? '' : ' is invalid';
             break;
             
@@ -92,8 +89,7 @@ class AddNewStudent extends React.Component
     {
         this.setState({formValid: this.state.firstNameValid && this.state.lastNameValid &&
              this.state.classNameValid &&this.state.divisionNmValid && this.state.addressLine1Valid &&
-             this.state.pincodeValid});
-             
+             this.state.pincodeValid});        
     }
     errorClass(error) 
     {
@@ -101,17 +97,17 @@ class AddNewStudent extends React.Component
     }
     handleAddStudent()
     {
-        //const tid=this.props.teacherId;
+        const tid=this.props.teacherId;
         const fname = this.state.FirstName;
         const lname = this.state.LastName;
         const classs = this.state.Class;
         const division= this.state.Division;
         const line1 = this.state.AddressLine1;
         const line2 = this.state.AddressLine2;
-        const pin = this.state.pincode;
+        const pin = document.getElementById("pincode").value;
         if(
             fetch('http://localhost:8080/addStudent?firstName='+fname+
-            '&lastName='+lname+'&TeacherID='+1+'&classs='+classs+'&division='+division+'&line1='+line1 +
+            '&lastName='+lname+'&TeacherID='+tid+'&classs='+classs+'&division='+division+'&line1='+line1 +
             '&line2='+ line2+'&pinCode='+pin,
             {method:'GET',mode:"no-cors"})
             .then(resp => resp)
@@ -121,15 +117,16 @@ class AddNewStudent extends React.Component
     }
     handleBack()
     {
-        this.setState({referrer:'/'})
+        this.setState({handleBackCalled:!this.state.handleBackCalled})
     }
     render()
     {
-        const{referrer}=this.state
+        const{referrer}=this.state;
+        const {handleBackCalled}=this.state;
         if(referrer)
-        {
             return <Redirect to={referrer}></Redirect>
-        }
+        if(handleBackCalled)
+            return <TeacherHome></TeacherHome>
         return(
             <div className="col-75 ">
                 <div className="center">
@@ -175,130 +172,3 @@ class AddNewStudent extends React.Component
     }
 }
 export default AddNewStudent;
-
-
-// handleFirstNameChange(value)
-// {
-//     let FirstNmValid = this.state.firstNameValid;
-//     if(value!=="")
-//     {
-//         FirstNmValid = value.match(/^[a-zA-Z'. -]+$/);
-//         this.setState({ErrfirstName:FirstNmValid ? '' : 'Only: letters\' . -'});
-//         this.setState({FirstName: value});
-//         this.setState({FirstNmValid: FirstNmValid},this.handleformvalid);
-//     }
-//     else{
-//         this.setState({ErrfirstName:"*First Name is required"});
-//     }
-
-// }
-// handleLastNameChange(value)
-// {
-//     let LastNmValid = this.state.lastNameValid;
-//     if(value!=="")
-//     {
-//         LastNmValid = value.match(/^[a-zA-Z'. -]+$/);
-//         this.setState({ErrlastName:LastNmValid ? '' : ' Only: letters\' . -'});
-//         this.setState({LastName: value});
-//         this.setState({LastNameValid: LastNmValid},this.handleformvalid);
-//     }
-//     else{
-//         this.setState({ErrlastName:"*Last Name is required"});
-//     }
-// }
-// handleClassChange(value)
-// {
-//     let classNmValid=this.state.classNameValid;
-//     if(value!=="")
-//     {
-//         classNmValid=value.match(/^[a-zA-Z0-9'. -]+$/);
-//         this.setState({ErrClass:classNmValid? '' : 'Only: letters\' . - 0-9'});
-//         this.setState({Class: value});
-//         this.setState({classNameValid: classNmValid},this.handleformvalid);
-//     }
-//     else{
-//         this.setState({ErrClass:"*Class is required"});
-//     }
-// }
-// handleDivisionChange(value)
-// {
-//     let divValid=this.state.divisionValid;
-//     if(value!=="")
-//     {
-//         divValid=value.match(/^[a-zA-Z]$/);
-//         this.setState({Errdivision:divValid? '':'Only single character'});
-//         this.setState({Division: value});
-//         this.setState({divisionValid: divValid},this.handleformvalid);
-//     }
-//     else{
-//         this.setState({Errdivision:"*Division is required"});
-//     }
-// }
-// handleAddressLine1Change(value)
-// {
-//     let addressValid=this.state.addressLine1Valid;
-//     if(value!=="")
-//     {
-//         addressValid = value.length <= 22;
-//         this.setState({ErraddressLine1:addressValid ? '' : ' Too long use Line2'});
-//         this.setState({AddressLine1: value});
-//         this.setState({addressLine1Valid: addressValid},this.handleformvalid);
-//     }
-//     else{
-//         this.setState({ErraddressLine1:"*Address is required"});
-//     }
-// }
-// handleAddressLine2Change(value)
-// {
-//     this.setState({AddressLine2: value});
-// }
-// handlePincodeChange(value)
-// {
-//     let pinValid = this.state.pincodeValid;
-//     if(value!=="")
-//     {
-//         pinValid = value.match(/^[0-9]+$/);
-//         this.setState({Errpincode:pinValid ? '' : '  Only numbers'});
-//         this.setState({pincode: value});
-//         this.setState({pincodeValid: pinValid},this.handleformvalid);
-//     }
-//     else{
-//         this.setState({Errpincode:"*PIN Code is required"});
-//     }
-// }
-// handleformvalid()
-// {
-//     this.setState({formValid: this.state.firstNameValid && this.state.lastNameValid &&
-//          this.state.classNameValid &&this.state.divisionValid &&this.state.addressLine1Valid &&
-//          this.state.pincodeValid});
-//          console.log("sdf" +!this.state.formValid);
-// }
-// 
-// handleBack()
-// {
-//     this.props.history.push('/TeacherHome');
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//  <InputBox inputType="text"  placeholder="First Name"    handleChanges={this.handleFirstNameChange}    Name="firstName"   error={this.state.ErrfirstName} /><br></br> 
-// <InputBox inputType="text"  placeholder="Last Name"     handleChanges={this.handleLastNameChange}     Name="lastName"    error={this.state.ErrlastName} /><br></br>           
-// <InputBox inputType="text"  placeholder="Class"         handleChanges={this.handleClassChange}        Name="class"       error={this.state.ErrClass} /><br></br>           
-// <InputBox inputType="text"  placeholder="Division"      handleChanges={this.handleDivisionChange}     Name="division"    error={this.state.Errdivision} /><br></br>           
-// <InputBox inputType="text"  placeholder="Address Line1" handleChanges={this.handleAddressLine1Change} Name="addressLine1"error={this.state.ErraddressLine1} /><br></br>           
-// <InputBox inputType="text"  placeholder="Address Line2" handleChanges={this.handleAddressLine2Change} Name="addressLine2"                                   /><br></br>           
-// <InputBox inputType="text"  placeholder="PIN code"      handleChanges={this.handlePincodeChange}      Name="pincode"     error={this.state.Errpincode} /><br></br>           
-// <button type="submit" onClick={this.handleAddStudent } disabled={!this.state.formValid}>new student</button>   
-// {/* <Button buttonName="Add Student" handleOnClick={this.handleAddStudent } error={this.state.ErrButton} disable={!this.state.formValid}/> */}
-// <Button buttonName="Back" handleOnClick={this.handleBack } />

@@ -29,7 +29,7 @@ export default class Registration extends Component{
         fetch("http://localhost:8080/addTeacher?firstName="+fname+"&lastName="+lname+
         "&userName="+uname+"&password="+pw)
        ){
-           alert("New teacher added...")
+           alert("New teacher "+fname+ ""+lname+ "added")
            this.props.history.push('/')
        }
     }

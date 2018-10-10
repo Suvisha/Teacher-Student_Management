@@ -6,6 +6,8 @@ import EditStudent from './EditStudent';
 import Axios from 'axios';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css' 
+import { Table } from 'react-bootstrap';
+import TeacherHome from './TeacherHome';
 
 class ListOfStudents extends React.Component
 {
@@ -16,6 +18,7 @@ class ListOfStudents extends React.Component
         this.state={
             students:[],
             editClicked: false,
+            handleBackCalled:false,
             studentToEdit:{},
             referrer:null,
             studentData:{}
@@ -24,7 +27,9 @@ class ListOfStudents extends React.Component
     }
     handleBack()
     {
-        this.props.history.push('/TeacherHome');
+        //this.props.history.push('/TeacherHome');
+        this.setState({handleBackCalled:!this.state.handleBackCalled});
+        console.log(this.state.handleBackCalled);
     }
     componentDidMount()
     {
@@ -79,17 +84,21 @@ class ListOfStudents extends React.Component
     render()
     {
         const {referrer} = this.state;
-        if (referrer) return (<Redirect to={referrer} />,
-                 <EditStudent studentToUpdate={this.state.studentData}/>);
+        const {handleBackCalled}=this.state;
+        console.log(handleBackCalled);
+        if (referrer) 
+            return (<Redirect to={referrer} />,<EditStudent studentToUpdate={this.state.studentData}/>);
+        if(handleBackCalled)
+            return <TeacherHome></TeacherHome>
         return(    
             <div>
-                <table className="center">
-                    <tbody>
+                <Table >
+                    <thead>
                         <tr>
                             <th>ID</th>
                             <th>First Name</th>
                             <th>Last Name</th>
-                            {/* <th>TeacherID</th> */}
+                            <th>TeacherID</th>
                             <th>class</th>
                             <th>division</th>
                             <th>AddressLine1</th>
@@ -98,27 +107,30 @@ class ListOfStudents extends React.Component
                             <th></th>
                             <th></th>
                         </tr>
+                    </thead>
                     {
                         this.state.students.map((student,index)=>{
                             return (
-                                <tr key={index}>
-                                <td>{student.studentId}</td>
-                                <td>{student.firstName}</td>
-                                    <td>{student.lastName}</td>
-                                    {/* <td>{student.teacherId}</td> */}
-                                    <td>{student.studentClass}</td>
-                                    <td>{student.division}</td>
-                                    <td>{student.addressLine1}</td>
-                                    <td>{student.addressLine2}</td>
-                                    <td>{student.pincode}</td>
-                                    <td><Button buttonName="Edit" handleOnClick={() => this.handleEditClicked(student)}/></td>
-                                    <td><Button buttonName="Delete" handleOnClick={() => this.handleDeleteClicked(student)}/></td>
-                                </tr>
+                                <tbody>
+                                    <tr key={index}>
+                                        <td>{student.studentId}</td>
+                                        <td>{student.firstName}</td>
+                                        <td>{student.lastName}</td>
+                                        <td>{student.teacherId}</td>
+                                        <td>{student.studentClass}</td>
+                                        <td>{student.division}</td>
+                                        <td>{student.addressLine1}</td>
+                                        <td>{student.addressLine2}</td>
+                                        <td>{student.pincode}</td>
+                                        <td><Button buttonName="Edit" handleOnClick={() => this.handleEditClicked(student)}/></td>
+                                        <td><Button buttonName="Delete" handleOnClick={() => this.handleDeleteClicked(student)}/></td>
+                                    </tr>
+                                </tbody>
                             ) 
                         })    
                     }
-                    </tbody>
-                </table>  
+                    
+                </Table>
                 <Button buttonName="Back" handleOnClick={this.handleBack}/>
             </div>
         );

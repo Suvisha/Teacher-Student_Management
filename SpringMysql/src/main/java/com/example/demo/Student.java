@@ -6,13 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.NamedStoredProcedureQueries;
-import javax.persistence.NamedStoredProcedureQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-
-
-
 
 @Entity
 @Table(name="student_info")

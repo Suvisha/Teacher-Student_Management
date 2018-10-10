@@ -1,22 +1,28 @@
 import React from 'react';
 import axios from 'axios'
 import TeacherHome from './TeacherHome';
-import { Redirect } from 'react-router-dom';
+import {connect} from 'react-redux'
 import '../App.css';
+import './Button.css';
 
-export default class Login extends React.Component
+class Login extends React.Component
 {
     constructor(props)
     {
       super(props);
       this.state={
-          validCredentials:false,
-          loggedData:[],error:" ",userName:"",password:"",
-          sessionData:[],referrer:null,
-          hits:null,TeacherData:{}
-        }
-        this.onLoginClick=this.onLoginClick.bind(this);
-        this.checkLoginCredentials= this.checkLoginCredentials.bind(this)
+        validCredentials:false,
+        loggedData:[],
+        validUser:React.createContext([]),
+        error:'',
+        hits:null,
+        isAuthenticated: false,
+        isAuthenticating: true,
+        
+      }
+      this.onLoginClick=this.onLoginClick.bind(this);
+      this.checkLoginCredentials= this.checkLoginCredentials.bind(this)
+      this.storeCredentials = this.storeCredentials.bind(this)
     }
     onLoginClick()
     {
@@ -32,47 +38,49 @@ export default class Login extends React.Component
     {
         for(let i=0;i<fetchedData.length;i++)
         {
-            if(uname===fetchedData[i].userName && pw===fetchedData[i].password)
+            if(fetchedData[i].userName===uname && fetchedData[i].password===pw)
             {
-            this.setState({validCredentials:!this.state.validCredentials})
-            this.setState({loggedData:fetchedData[i]})
-            this.setState({referrer:'/TeacherHome'})
-            this.setState({TeacherData:this.state.loggedData});
-            this.setState({userName:this.state.loggedData.firstName});
-            this.setState({password:this.state.loggedData.password});
+                this.setState({loggedData:fetchedData[i]})
+                this.storeCredentials(this.state.loggedData)
+                break;
             }
             else
-             this.setState({error:"UserName or password is incorrect Plz check"})
+            {
+                this.setState({error:'invalid user or password...'})
+            }
         }
     }
-    onSignUpClick()
+    storeCredentials(dataTobeStore)
     {
-        this.props.history.push("/Registration")
+        if(dataTobeStore!==undefined)
+        {
+            const loggedInData = dataTobeStore
+            console.log(loggedInData)
+            this.props.dispatch({
+                type:'ADD_LOGIN',
+                loggedInData})
+            this.setState({validCredentials:!this.state.validCredentials})
+        }
     }
     render()
     {
-        //const {userName,password} = this.state;
-        if(this.state.validCredentials === true)
-        {
-            const {referrer} = this.state;
-            
-            if (referrer)
-             return (<Redirect to={referrer} />,<TeacherHome teacherData={this.state.TeacherData}/>);
+        if(this.state.validCredentials === true){
+            return <TeacherHome />
         }
         return(
-        <div id="LoginData" className="LoginPage"> 
+        <div id="LoginData" className="LoginPage"> <br/>
+            <label>User Name&nbsp;: </label>
+            <input id="userName" type="text"  placeholder="User Name" required></input>
             <br/><br/>
-            <label>User Name :</label>
-            <input id="userName" type="text"  placeholder="User Name" ref={node => this.input = node}></input>
-            <br/><br/>
-            <label>Password :</label>
-            <input id="password" type="password"  placeholder="Password"></input>
+            <label>Password&nbsp;&nbsp;&nbsp;: </label>
+            <input id="password" type="password" placeholder="password" required></input>
             <br/><br/>
             <button onClick={this.onLoginClick}>Login</button><br/><br/>
-            <label className="label"> {this.state.error} </label> <br/><br/>
+            <label className="label"> {this.state.error} </label> <br/><br/> 
             <a href="/"> Home </a><br/><br/>
             <a href="/Registration">Registration</a>      
         </div>
         )
     }  
 }
+export default connect() (Login)

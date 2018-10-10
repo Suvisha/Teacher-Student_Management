@@ -3,6 +3,7 @@ import InputBox from './InputBox';
 import Button from './Button';
 import '../App.css';
 import { Redirect } from 'react-router-dom';
+import ListOfStudents from './ListOfStudents';
 //import Axios from 'axios';
 
 class EditStudent extends React.Component
@@ -10,19 +11,19 @@ class EditStudent extends React.Component
     constructor(props)
     {
         super(props)
-        this.state={studentId:this.props.studentToUpdate.studentId,
+        this.state={studentId:this.props.studentToUpdate.id,
                     FirstName:this.props.studentToUpdate.firstName,
                     LastName:this.props.studentToUpdate.lastName,
                     Class:this.props.studentToUpdate.studentClass,
                     Division:this.props.studentToUpdate.division,
-                    AddressLine1: this.props.studentToUpdate.addressLine1,
-                    AddressLine2: this.props.studentToUpdate.AddressLine2,
+                    AddressLine1:this.props.studentToUpdate.addressLine1,
+                    AddressLine2:this.props.studentToUpdate.addressLine2,
                     pincode:this.props.studentToUpdate.pincode,
                     firstNameValid:false,
                     lastNameValid:false,
                     divisionValid: false,
-                    addressLine1Valid:false,
-                    pincodeValid:false,
+                    addressLine1Valid:false,handleEditcalled:false,
+                    pincodeValid:false,handlebackcalled:false,
                     ErrfirstName:" ",ErrlastName:" ",ErrClass:"",Errdivision:" ",
                     ErraddressLine1:" ",Errpincode:"",ErrButton:""
                     }
@@ -125,15 +126,15 @@ class EditStudent extends React.Component
     }
     handleEditStudent()
     {
-        const id=this.props.studentToUpdate.studentId;console.log(id);
-        const tid=this.props.studentToUpdate.teacherId;console.log(tid);
-        const fname = this.state.FirstName;  console.log(fname);
-        const lname = this.state.LastName; console.log(lname);
-        const classs = this.state.Class; console.log(classs);
-        const division= this.state.Division; console.log(division);
-        const line1 = this.state.AddressLine1; console.log(line1);
-        const line2 = this.state.AddressLine2; console.log(line2);
-        const pin = this.state.pincode; console.log(pin);
+        const id=this.props.studentToUpdate.studentId;
+        const tid=this.props.studentToUpdate.teacherId;
+        const fname = document.getElementById("fname").value;
+        const lname = document.getElementById("lname").value;
+        const classs = document.getElementById("class").value;
+        const division= document.getElementById("div").value;
+        const line1 = document.getElementById("address1").value;
+        const line2 = document.getElementById("address2").value;
+        const pin = document.getElementById("pin").value;
         if(this.state.FirstName!=="" && this.state.LastName!==""&&this.state.Class!=="" && this.state.Division!==""&&this.state.AddressLine1!=="" && this.state.pincode!=="")
         {
            if(fetch('http://localhost:8080/updateStudent?id='+id+'&firstName='+fname+
@@ -144,10 +145,8 @@ class EditStudent extends React.Component
             .then(findResp => this.setState({data:findResp}))
            )
            {
-            alert("Updated "+ this.state.FirstName);
-            //this.setState({referrer:'/ListOfStudents'})  
-            //this.props.history.push('/ListOfStudents')
-            window.location.reload(); 
+            alert("Updated "+ fname+ " "+lname);
+            this.setState({handleEditcalled:!this.state.handleEditcalled});
            }    
         }
         else
@@ -157,31 +156,39 @@ class EditStudent extends React.Component
     }
     handleBack()
     {
-        window.location.reload();
+        this.setState({handlebackcalled:!this.state.handlebackcalled});
     }
     render()
     {
         const {referrer} = this.state;
-        if (referrer) return (<Redirect to={referrer} />);
+        const {handlebackcalled}=this.state;
+        const {handleEditcalled}=this.state
+        if (referrer) 
+            return (<Redirect to={referrer} />);
+        if(handlebackcalled)
+            return <ListOfStudents></ListOfStudents>
+        if(handleEditcalled)
+            return <ListOfStudents></ListOfStudents>
         return(
             <div className="col-75 ">
             <div className="center">
             <h2> Student To be edit:  {this.props.studentToUpdate.firstName} </h2>
             </div> 
                 <form>
-                    <InputBox inputType="text"  placeholder="First Name"    value={this.state.FirstName}    
+                    <InputBox id="fname" inputType="text"  placeholder="First Name"    value={this.props.studentToUpdate.firstName}    
                               handleChanges={this.handleFirstNameChange}    Name="firstName"   error={this.state.ErrfirstName} /><br/>
-                    <InputBox inputType="text"  placeholder="Last Name"     value={this.props.studentToUpdate.lastName}     
+                    
+                    <InputBox id="lname" inputType="text"  placeholder="Last Name"     value={this.props.studentToUpdate.lastName}     
                               handleChanges={this.handleLastNameChange}     Name="lastName"    error={this.state.ErrlastName} /><br/>          
-                    <InputBox inputType="text"  placeholder="Class"         value={this.props.studentToUpdate.studentClass}        
+                    <InputBox id="class" inputType="text"  placeholder="Class"         value={this.props.studentToUpdate.studentClass}        
                               handleChanges={this.handleClassChange}        Name="class"       error={this.state.ErrClass} /><br/>         
-                    <InputBox inputType="text"  placeholder="Division"      value={this.props.studentToUpdate.division}     
+                    <InputBox id="div" inputType="text"  placeholder="Division"      value={this.props.studentToUpdate.division}     
                               handleChanges={this.handleDivisionChange}     Name="division"    error={this.state.Errdivision} /><br/>          
-                    <InputBox inputType="text"  placeholder="Address Line1" value={this.props.studentToUpdate.addressLine1} 
+                    <InputBox id="address1" inputType="text"  placeholder="Address Line1" value={this.props.studentToUpdate.addressLine1} 
                               handleChanges={this.handleAddressLine1Change} Name="addressLine1"error={this.state.ErraddressLine1} /><br/>
-                    <InputBox inputType="text"  placeholder="Address Line2" value={this.props.studentToUpdate.addressLine2} 
+                    <InputBox id="address2" inputType="text"  placeholder="Address Line2" value={this.props.studentToUpdate.addressLine2} 
                               handleChanges={this.handleAddressLine2Change} Name="addressLine2"                               /><br/>
-                    <InputBox inputType="text"  placeholder="PIN code"      value={this.props.studentToUpdate.pincode}      
+                    <InputBox id="pin" inputType="text"  placeholder="PIN code"      value={this.props.studentToUpdate.pincode}      
                               handleChanges={this.handlePincodeChange}      Name="pincode"     error={this.state.Errpincode} /><br/>           
                     <Button buttonName="Edit Student" handleOnClick={this.handleEditStudent} error={this.state.ErrButton}/>
                     <Button buttonName="Back" handleOnClick={this.handleBack}/>

@@ -11,6 +11,8 @@
   height: 70px;
   padding: 5px;
   color: white;
+  width: 100%;
+  position: relative;
 }
 .App-Footer
 {
@@ -71,8 +73,10 @@
   text-align: center;
   margin-top: 10px;
 }
-@media screen and (max-width: 600px) {
-  .col-25, .col-75, input[type=submit] {
+@media screen and (max-width: 600px),screen and(max-width:1600px),
+       screen and(max-width:320px),screen and(max-width:360px)  
+{
+  .col-25, .col-75, input[type=submit], .App, .App-header, .App-Footer, .App-title{
       width: 100%;
       margin-top: 0;
   }
