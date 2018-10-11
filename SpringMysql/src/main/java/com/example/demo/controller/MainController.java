@@ -4,12 +4,13 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Student;
 import com.example.demo.Teacher;
@@ -17,7 +18,8 @@ import com.example.demo.repositoriess.StudentRepository;
 import com.example.demo.repositoriess.TeacherRepository;
 
 
-@Controller
+@RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class MainController 
 {
 	@Autowired
@@ -31,7 +33,7 @@ public class MainController
 		return "index.html";
 	}
 	
-	@GetMapping(path="/addTeacher")
+	@PostMapping(path="/addTeacher")
 	@ResponseBody
 	public String addNewTeacher(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String userName, @RequestParam String password)
 	{
@@ -54,7 +56,7 @@ public class MainController
 		return teacherRepository.findAll();
 	}
 	
-	@GetMapping(path="/addStudent")
+	@PostMapping(path="/addStudent")
 	@ResponseBody
 	public String addNewStudent(@RequestParam String firstName, @RequestParam String lastName,@RequestParam int TeacherID,
 			@RequestParam String classs, @RequestParam String division,@RequestParam String line1, @RequestParam String line2,@RequestParam String pinCode)
@@ -100,7 +102,7 @@ public class MainController
 	}
 	
 	
-	@GetMapping(path="/updateStudent")
+	@PostMapping(path="/updateStudent")
     public String updateStudent(@RequestParam int id,@RequestParam String firstName, @RequestParam String lastName,@RequestParam int TeacherId,
     		@RequestParam String classs, @RequestParam String division,@RequestParam String line1, @RequestParam String line2,@RequestParam String pinCode)
 	{

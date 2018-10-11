@@ -109,7 +109,7 @@ class AddNewStudent extends React.Component
             fetch('http://localhost:8080/addStudent?firstName='+fname+
             '&lastName='+lname+'&TeacherID='+tid+'&classs='+classs+'&division='+division+'&line1='+line1 +
             '&line2='+ line2+'&pinCode='+pin,
-            {method:'GET',mode:"no-cors"})
+            {method:'POST',mode:"no-cors"})
             .then(resp => resp)
             .then(findResp => this.setState({data:findResp}))
         )

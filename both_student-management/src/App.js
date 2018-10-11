@@ -6,22 +6,12 @@ import TeacherHome from './StudentManagement/TeacherHome'
 import ListOfStudents from './StudentManagement/ListOfStudents'
 import AddNewStudent from './StudentManagement/AddNewStudent'
 import EditStudent from './StudentManagement/EditStudent'
-import DeleteStudent from './StudentManagement/DeleteStudent'
 import './App.css';
 
 class App extends Component
 {
-  constructor(props)
-  {
-    super(props)
-    this.state={isLoaded:true};
-  }
-  
   render() 
   {
-    const {isLoaded}=this.state;
-   if(isLoaded)
-   {
     return(
       <div className="App">
         <header className="App-header">
@@ -36,7 +26,6 @@ class App extends Component
               <Route exact path='/ListOfStudents' component={ListOfStudents} />
               <Route exact path='/AddNewStudent' component={AddNewStudent} />
               <Route exact path="/ListOfStudents/EditStudent" component={EditStudent}/>
-              <Route exact path="/ListOfStudents/DeleteStudent" component={DeleteStudent}/>
             </Switch>
           </div>
         </Router>
@@ -45,10 +34,6 @@ class App extends Component
         </footer>
     </div> 
     );
-  }
-  else
-  {
-    alert("Not connected spring url")}
   }
 }
 export default App;

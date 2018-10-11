@@ -114,9 +114,7 @@ class SignUpForm extends Component
                 value={this.state.value} onChange={this.handleUserInput}/>
         </div> <br/><br/>
         <button type="submit" onClick={this.props.onSubmitClick} disabled={!this.state.formValid}>Sign up</button>    <br/><br/>
-        <button type="submit" onClick={this.handleBack}>Back</button>   
-        {/* <Button buttonName="Home" handleOnClick={this.handleBack}/> */}
-      
+        <button type="submit" onClick={this.handleBack}>Back</button>
       </form>
     )
   }

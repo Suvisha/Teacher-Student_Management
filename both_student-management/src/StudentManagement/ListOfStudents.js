@@ -27,9 +27,7 @@ class ListOfStudents extends React.Component
     }
     handleBack()
     {
-        //this.props.history.push('/TeacherHome');
         this.setState({handleBackCalled:!this.state.handleBackCalled});
-        console.log(this.state.handleBackCalled);
     }
     componentDidMount()
     {
@@ -46,13 +44,20 @@ class ListOfStudents extends React.Component
     handleEditClicked(student)
     {
         const id = student.studentId;
-        Axios.get('http://localhost:8080/viewStudentByID?id='+id)
-        .then(res=>res)
-        .then((dataById={})=>{
+//        const tid=this.props.teacherId;
+//        const stid=student.teacherId;
+//        if(tid===stid)
+//        {
+            Axios.get('http://localhost:8080/viewStudentByID?id='+id)
+                 .then(res=>res)
+                 .then((dataById={})=>{
             this.setState({studentToEdit:dataById})
             this.setState({referrer:'/ListOfStudents/EditStudent'})
             this.setState({studentData:this.state.studentToEdit.data});
-        })
+            })
+//        }
+//        else
+//        alert("You can't Edit this student");
     }
     updateStudentIDinEditStudent(student)
     {
@@ -65,27 +70,33 @@ class ListOfStudents extends React.Component
     handleDeleteClicked(student)
     {  
         const id = student.studentId;
-        confirmAlert(
-        {
-            title: 'Confirm to Delete',
-            message: 'Are you sure to do this.',
-            buttons: [
+//        const tid=this.props.teacherId;
+//        const stid=student.teacherId;
+//        if(tid===stid)
+//        {
+            confirmAlert(
             {
-                label: 'Yes',
-                onClick: () => fetch('http://localhost:8080/deleteStudent?id='+id, {method:'POST',mode:'no-cors'})
-                                .then(res=>this.loadStudentsFromServer())
-            },
-            {
-                label: 'No'
-            }
-            ]
-        })
+                title: 'Confirm to Delete',
+                message: 'Are you sure to do this.',
+                buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => fetch('http://localhost:8080/deleteStudent?id='+id, {method:'POST',mode:'no-cors'})
+                                    .then(res=>this.loadStudentsFromServer())
+                },
+                {
+                    label: 'No'
+                }
+                ]
+            })
+ //       }
+//        else
+//        alert("You can't Delete this student");
     }
     render()
     {
         const {referrer} = this.state;
         const {handleBackCalled}=this.state;
-        console.log(handleBackCalled);
         if (referrer) 
             return (<Redirect to={referrer} />,<EditStudent studentToUpdate={this.state.studentData}/>);
         if(handleBackCalled)
@@ -129,7 +140,6 @@ class ListOfStudents extends React.Component
                             ) 
                         })    
                     }
-                    
                 </Table>
                 <Button buttonName="Back" handleOnClick={this.handleBack}/>
             </div>

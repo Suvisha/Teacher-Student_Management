@@ -1,8 +1,8 @@
 import React,{Component} from 'react'
 import SignUpForm from './SignUpForm'
-//import mysql from 'mysql'
 
-export default class Registration extends Component{
+export default class Registration extends Component
+{
     constructor(props){
         super(props);
         this.state = {

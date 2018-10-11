@@ -51,7 +51,7 @@ class TeacherHome extends React.Component
           return <Redirect to={referrer}></Redirect>
       }
       if(listOfStudentsCalled){
-          return <ListOfStudents></ListOfStudents>
+          return <ListOfStudents teacherId={this.props.teachers.teacherID}></ListOfStudents>
       }
       if(addNewStudentCalled){
           return <AddNewStudent teacherId={this.props.teachers.teacherID}></AddNewStudent>

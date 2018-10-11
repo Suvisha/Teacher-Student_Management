@@ -140,7 +140,7 @@ class EditStudent extends React.Component
            if(fetch('http://localhost:8080/updateStudent?id='+id+'&firstName='+fname+
             '&lastName='+lname+'&TeacherId='+tid+'&classs='+classs+'&division='+division+'&line1='+line1 +
             '&line2='+line2+'&pinCode='+pin,
-            {method:'GET',mode:"no-cors"})
+            {method:'POST',mode:"no-cors"})
             .then(resp => resp)
             .then(findResp => this.setState({data:findResp}))
            )

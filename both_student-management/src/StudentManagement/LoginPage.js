@@ -44,6 +44,10 @@ class Login extends React.Component
                 this.storeCredentials(this.state.loggedData)
                 break;
             }
+            else if(uname===''|| pw==='')
+            {
+                this.setState({error:'Enter username or password...'})
+            }
             else
             {
                 this.setState({error:'invalid user or password...'})
@@ -55,7 +59,6 @@ class Login extends React.Component
         if(dataTobeStore!==undefined)
         {
             const loggedInData = dataTobeStore
-            console.log(loggedInData)
             this.props.dispatch({
                 type:'ADD_LOGIN',
                 loggedInData})
