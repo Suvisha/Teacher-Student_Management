@@ -42,22 +42,25 @@ class TeacherHome extends React.Component
     }
     render()
     {
-      const{referrer}=this.state
+     // const{referrer}=this.state
       const {listOfStudentsCalled}=this.state;
       const {addNewStudentCalled}=this.state;
       const {logOutCalled}=this.state;
-      if(referrer)
+    //   if(referrer)
+    //   {
+    //       return <Redirect to={referrer}></Redirect>
+    //   }
+      if(logOutCalled)
       {
-          return <Redirect to={referrer}></Redirect>
+          return <Redirect to={Login}></Redirect> //<Login></Login>
       }
-      if(listOfStudentsCalled){
-          return <ListOfStudents teacherId={this.props.teachers.teacherID}></ListOfStudents>
-      }
-      if(addNewStudentCalled){
+      else if(addNewStudentCalled)
+      {
           return <AddNewStudent teacherId={this.props.teachers.teacherID}></AddNewStudent>
       }
-      if(logOutCalled){
-          return <Login></Login>
+      else if(listOfStudentsCalled)
+      {
+          return <ListOfStudents teacherId={this.props.teachers.teacherID}></ListOfStudents>
       }
       return(
         <div id ="TeacherHome" className="col-75 ">

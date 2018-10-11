@@ -23,7 +23,7 @@ class ListOfStudents extends React.Component
             referrer:null,
             studentData:{}
         }
-      this.updateStudentIDinEditStudent=this.updateStudentIDinEditStudent.bind(this)
+     // this.updateStudentIDinEditStudent=this.updateStudentIDinEditStudent.bind(this)
     }
     handleBack()
     {
@@ -59,14 +59,14 @@ class ListOfStudents extends React.Component
 //        else
 //        alert("You can't Edit this student");
     }
-    updateStudentIDinEditStudent(student)
-    {
-        const id=student.studentId;
-        Axios.get('http://localhost:8080/updateStudent?student='+student+'&id='+id)
-        .then(resp => resp)
-        .then(findResp => this.setState({data:findResp}))
-        .then(res=>this.loadStudentsFromServer())
-    }
+    // updateStudentIDinEditStudent(student)
+    // {
+    //     const id=student.studentId;
+    //     Axios.get('http://localhost:8080/updateStudent?student='+student+'&id='+id)
+    //     .then(resp => resp)
+    //     .then(findResp => this.setState({data:findResp}))
+    //     .then(res=>this.loadStudentsFromServer())
+    // }
     handleDeleteClicked(student)
     {  
         const id = student.studentId;
@@ -81,7 +81,7 @@ class ListOfStudents extends React.Component
                 buttons: [
                 {
                     label: 'Yes',
-                    onClick: () => fetch('http://localhost:8080/deleteStudent?id='+id, {method:'POST',mode:'no-cors'})
+                    onClick: () => fetch('http://localhost:8080/deleteStudent?id='+id, {method:'DELETE'})
                                     .then(res=>this.loadStudentsFromServer())
                 },
                 {
