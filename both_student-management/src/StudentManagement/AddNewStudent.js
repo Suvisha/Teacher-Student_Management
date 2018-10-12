@@ -3,6 +3,7 @@ import {FormErrors} from './FormErrors.js'
 import { Redirect } from 'react-router-dom';
 import '../App.css';
 import TeacherHome from './TeacherHome.js';
+import {connect} from 'react-redux'
 
 class AddNewStudent extends React.Component
 {
@@ -97,7 +98,7 @@ class AddNewStudent extends React.Component
     }
     handleAddStudent()
     {
-        const tid=this.props.teacherId;
+        const tid   =this.props.teachers.teacherID;
         const fname = this.state.FirstName;
         const lname = this.state.LastName;
         const classs = this.state.Class;
@@ -117,7 +118,9 @@ class AddNewStudent extends React.Component
     }
     handleBack()
     {
-        this.setState({handleBackCalled:!this.state.handleBackCalled})
+       // this.props.history.push('/TeacherHome')
+       this.setState({handleBackCalled:!this.state.handleBackCalled})
+        
     }
     render()
     {
@@ -171,4 +174,9 @@ class AddNewStudent extends React.Component
         );
     }
 }
-export default AddNewStudent;
+const mapStateToProps = (state) => {
+    return{
+        teachers:state.LoginReducer[0]
+    }
+  }
+export default connect (mapStateToProps) (AddNewStudent);

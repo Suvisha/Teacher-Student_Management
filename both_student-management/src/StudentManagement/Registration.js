@@ -27,9 +27,10 @@ export default class Registration extends Component
         const pw = document.getElementById("pass_word").value;
        if(
         fetch("http://localhost:8080/addTeacher?firstName="+fname+"&lastName="+lname+
-        "&userName="+uname+"&password="+pw)
-       ){
-           alert("New teacher "+fname+ ""+lname+ "added")
+        "&userName="+uname+"&password="+pw,
+        {method:'POST',mode:"no-cors"}))
+       {
+           alert("New teacher "+fname+ " "+lname+ " added")
            this.props.history.push('/')
        }
     }

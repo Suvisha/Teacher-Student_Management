@@ -1,23 +1,25 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Route,Switch} from 'react-router-dom'
+import {Router, Route,Switch} from 'react-router-dom'
 import Registration from './StudentManagement/Registration.js'
 import Login from './StudentManagement/LoginPage'
 import TeacherHome from './StudentManagement/TeacherHome'
 import ListOfStudents from './StudentManagement/ListOfStudents'
 import AddNewStudent from './StudentManagement/AddNewStudent'
 import EditStudent from './StudentManagement/EditStudent'
+import {createBrowserHistory} from 'history'
 import './App.css';
 
 class App extends Component
 {
   render() 
   {
+    const history = createBrowserHistory();
     return(
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Welcome To Student Management System</h1>
         </header> 
-        <Router>
+        <Router history={history}>
           <div>
             <Switch>   
               <Route exact path='/' component={Login} />   

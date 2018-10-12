@@ -23,7 +23,6 @@ class ListOfStudents extends React.Component
             referrer:null,
             studentData:{}
         }
-     // this.updateStudentIDinEditStudent=this.updateStudentIDinEditStudent.bind(this)
     }
     handleBack()
     {
@@ -44,8 +43,9 @@ class ListOfStudents extends React.Component
     handleEditClicked(student)
     {
         const id = student.studentId;
-//        const tid=this.props.teacherId;
-//        const stid=student.teacherId;
+  //      const tid=this.props.teacherId;
+   //     const stid=student.teacherId;
+  //     console.log("TeacherId"+stid)
 //        if(tid===stid)
 //        {
             Axios.get('http://localhost:8080/viewStudentByID?id='+id)
@@ -59,21 +59,12 @@ class ListOfStudents extends React.Component
 //        else
 //        alert("You can't Edit this student");
     }
-    // updateStudentIDinEditStudent(student)
-    // {
-    //     const id=student.studentId;
-    //     Axios.get('http://localhost:8080/updateStudent?student='+student+'&id='+id)
-    //     .then(resp => resp)
-    //     .then(findResp => this.setState({data:findResp}))
-    //     .then(res=>this.loadStudentsFromServer())
-    // }
     handleDeleteClicked(student)
     {  
         const id = student.studentId;
 //        const tid=this.props.teacherId;
 //        const stid=student.teacherId;
 //        if(tid===stid)
-//        {
             confirmAlert(
             {
                 title: 'Confirm to Delete',
@@ -89,9 +80,6 @@ class ListOfStudents extends React.Component
                 }
                 ]
             })
- //       }
-//        else
-//        alert("You can't Delete this student");
     }
     render()
     {
@@ -147,89 +135,3 @@ class ListOfStudents extends React.Component
     }
 }
 export default ListOfStudents;  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-<EditStudent studentToUpdate={this.state.studentToEdit.data}/>);
-<table className="center">
-                     <tbody>           
-                         <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>TeacherID</th>
-                            <th>class</th>
-                            <th>division</th>
-                            <th>line1</th>
-                            <th>line2</th>
-                            <th>pinCode</th>
-                        </tr>
-                     </tbody>
-                     </table> 
- */
-
-
-
-
-
-
-    // constructor(props)
-    // {
-    //     super(props);
-    //     this.handleList = this.handleList.bind(this);
-    // }
-    // handleList()
-    // {
-    //     var names = [['1','Venu','v c', '9','D','MP,Null stop','pune','780405'],
-    //                 ['2','Veag','Kta', '9','A','hp,Swargate','pune','780404'],
-    //                 ['3','ragha','Sha', '9','B','LK,Karve road','pune','780801']];
-    //     return (
-    //         <div >
-                
-    //         <table>
-    //         {
-                
-    //             names.map(function(name, index) 
-    //             {
-    //                 return <div> 
-    //                         <tr>
-    //                             <td>{name[0]}</td>
-    //                             <td>{name[1]}</td>
-    //                             <td>{name[2]}</td>
-    //                             <td>{name[3]}</td>
-    //                             <td>{name[4]}</td>
-    //                             <td>{name[5]}</td>
-    //                             <td>{name[6]}</td>
-    //                             <td>{name[7]}</td>
-    //                             <td><EditLink></EditLink></td>
-    //                             <td><DeleteLink></DeleteLink></td>
-    //                         </tr>
-    //                       </div>
-    //             })
-    //         }
-    //         </table>
-    //     </div>
-    //     )
-    // }
-    // render() {
-    // return (
-    //         <div>
-    //             <center> {this.handleList()} </center>
-    //         </div>
-    //         );
-    //         }
-
-

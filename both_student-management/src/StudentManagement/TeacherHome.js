@@ -2,7 +2,7 @@ import React from 'react';
 import Button from "./Button";
 import Home from "./Home";
 import '../App.css';
-import { Redirect } from 'react-router-dom';
+//import { Redirect } from 'react-router-dom';
 import {connect} from 'react-redux'
 import ListOfStudents from './ListOfStudents'
 import AddNewStudent from './AddNewStudent'
@@ -50,13 +50,14 @@ class TeacherHome extends React.Component
     //   {
     //       return <Redirect to={referrer}></Redirect>
     //   }
+    //   else 
       if(logOutCalled)
       {
-          return <Redirect to={Login}></Redirect> //<Login></Login>
+          return <Login></Login>
       }
       else if(addNewStudentCalled)
       {
-          return <AddNewStudent teacherId={this.props.teachers.teacherID}></AddNewStudent>
+          return <AddNewStudent ></AddNewStudent>
       }
       else if(listOfStudentsCalled)
       {

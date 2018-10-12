@@ -36,7 +36,8 @@ public class MainController
 	
 	@PostMapping(path="/addTeacher")
 	@ResponseBody
-	public String addNewTeacher(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String userName, @RequestParam String password)
+	public String addNewTeacher(@RequestParam String firstName, @RequestParam String lastName, 
+								@RequestParam String userName, @RequestParam String password)
 	{
 		//System.out.println("Request from  react....");
 		System.out.println("new teacher added....");
