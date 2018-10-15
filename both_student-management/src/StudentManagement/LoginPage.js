@@ -60,14 +60,14 @@ class Login extends React.Component
         {
             const loggedInData = dataTobeStore
             this.props.dispatch({
-                type:'ADD_LOGIN',
-                loggedInData})
+                type:'ADD_LOGIN',loggedInData})
             this.setState({validCredentials:!this.state.validCredentials})
         }
     }
     render()
     {
-        if(this.state.validCredentials === true){
+        if(this.state.validCredentials === true)
+        {
             return <TeacherHome />
         }
         return(

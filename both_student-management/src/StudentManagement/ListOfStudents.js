@@ -8,6 +8,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css' 
 import { Table } from 'react-bootstrap';
 import TeacherHome from './TeacherHome';
+import {connect} from 'react-redux'
 
 class ListOfStudents extends React.Component
 {
@@ -18,7 +19,7 @@ class ListOfStudents extends React.Component
         this.state={
             students:[],
             editClicked: false,
-            handleBackCalled:false,
+            handleBackCalled:false,teacherId:"",
             studentToEdit:{},
             referrer:null,
             studentData:{}
@@ -30,6 +31,7 @@ class ListOfStudents extends React.Component
     }
     componentDidMount()
     {
+        this.setState({teacherId:this.props.teachers.teacherID})
         this.loadStudentsFromServer()
     }
     loadStudentsFromServer()
@@ -37,17 +39,15 @@ class ListOfStudents extends React.Component
         fetch('http://localhost:8080/getAllStudent')
         .then(res => res.json())
         .then((rows=[]) => {
-          this.setState({ students: rows })
+          this.setState({ students: rows})
         })
     }
     handleEditClicked(student)
     {
-        const id = student.studentId;
-  //      const tid=this.props.teacherId;
-   //     const stid=student.teacherId;
-  //     console.log("TeacherId"+stid)
-//        if(tid===stid)
-//        {
+      const id = student.studentId;
+      const stid=student.teacherId;
+      if(this.state.teacherId===stid)
+      {
             Axios.get('http://localhost:8080/viewStudentByID?id='+id)
                  .then(res=>res)
                  .then((dataById={})=>{
@@ -55,16 +55,16 @@ class ListOfStudents extends React.Component
             this.setState({referrer:'/ListOfStudents/EditStudent'})
             this.setState({studentData:this.state.studentToEdit.data});
             })
-//        }
-//        else
-//        alert("You can't Edit this student");
+        }
+        else
+        alert("You can't Edit this student");
     }
     handleDeleteClicked(student)
     {  
         const id = student.studentId;
-//        const tid=this.props.teacherId;
-//        const stid=student.teacherId;
-//        if(tid===stid)
+        const stid=student.teacherId;
+        if(this.state.teacherId===stid)
+        {
             confirmAlert(
             {
                 title: 'Confirm to Delete',
@@ -80,6 +80,9 @@ class ListOfStudents extends React.Component
                 }
                 ]
             })
+        }
+        else
+        alert("You can't Edit this student");
     }
     render()
     {
@@ -134,4 +137,10 @@ class ListOfStudents extends React.Component
         );
     }
 }
-export default ListOfStudents;  
+//export default ListOfStudents;  
+const mapStateToProps = (state) => {
+    return{
+        teachers:state.LoginReducer[0]
+    }
+  }
+export default connect (mapStateToProps) (ListOfStudents);

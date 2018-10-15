@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.example.demo.Student;
 import com.example.demo.Teacher;
 import com.example.demo.repositoriess.StudentRepository;
@@ -114,7 +112,7 @@ public class MainController
     Optional<Student> studentOptional = studentRepository.findById(id);
     if (!studentOptional.isPresent())
     {
-                    return notFound;
+           return notFound;
     }
     else{
     studentRepository.findById(id);

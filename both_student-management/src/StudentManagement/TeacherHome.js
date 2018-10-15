@@ -61,7 +61,8 @@ class TeacherHome extends React.Component
       }
       else if(listOfStudentsCalled)
       {
-          return <ListOfStudents teacherId={this.props.teachers.teacherID}></ListOfStudents>
+        //  return <ListOfStudents teacherId={this.props.teachers.teacherID}></ListOfStudents>
+        return <ListOfStudents></ListOfStudents>
       }
       return(
         <div id ="TeacherHome" className="col-75 ">
