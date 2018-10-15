@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import '../App.css';
 import TeacherHome from './TeacherHome.js';
 import {connect} from 'react-redux'
+import Button from './Button.js';
 
 class AddNewStudent extends React.Component
 {
@@ -166,8 +167,8 @@ class AddNewStudent extends React.Component
                             <input id="pincode" type="text" placeholder="PIN code" name="PIN" required
                                 value={this.state.value} onChange={this.handleUserInput}/>
                         </div><br/>
-                        <button type="submit" onClick={this.handleAddStudent} disabled={!this.state.formValid}>Add New Student</button>    <br/><br/>
-                        <button type="submit" onClick={this.handleBack}>Back</button>   
+                        <Button buttonName="Add Student" handleOnClick={this.handleAddStudent} disabled={!this.state.formValid} />
+                        <Button buttonName="Back" handleOnClick={this.handleBack}/> 
                     </form>
                 </div>
             </div>
