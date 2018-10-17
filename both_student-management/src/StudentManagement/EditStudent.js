@@ -11,14 +11,10 @@ class EditStudent extends React.Component
     constructor(props)
     {
         super(props)
-        this.state={studentId:this.props.studentToUpdate.id,
-                    FirstName:this.props.studentToUpdate.firstName,
-                    LastName:this.props.studentToUpdate.lastName,
-                    Class:this.props.studentToUpdate.studentClass,
-                    Division:this.props.studentToUpdate.division,
-                    AddressLine1:this.props.studentToUpdate.addressLine1,
-                    AddressLine2:this.props.studentToUpdate.addressLine2,
-                    pincode:this.props.studentToUpdate.pincode,
+        this.state={studentId:'',FirstName:'',teacherId:'',
+                    LastName:'',Class:'',
+                    Division:'',AddressLine1:'',
+                    AddressLine2:'',pincode:'',
                     firstNameValid:false,
                     lastNameValid:false,
                     divisionValid: false,
@@ -37,16 +33,12 @@ class EditStudent extends React.Component
         this.handlePincodeChange=this.handlePincodeChange.bind(this);
         this.handleBack=this.handleBack.bind(this);
     }
-    componentWillMount()
-    {
-        
-    }
     handleFirstNameChange(value)
     { 
         let FirstNmValid = this.state.firstNameValid;
         if(value!=="")
         {
-            FirstNmValid = value.match(/^[a-zA-Z'. -]+$/);
+            FirstNmValid = value.match(/^[a-zA-Z'.-]+$/);
             this.setState({ErrfirstName:FirstNmValid ? '' : ' Only: letters\' . -',});
             this.setState({FirstName: value});
         }
@@ -59,7 +51,7 @@ class EditStudent extends React.Component
         let LastNmValid = this.state.lastNameValid;
         if(value!=="")
         {
-            LastNmValid = value.match(/^[a-zA-Z'. -]+$/);
+            LastNmValid = value.match(/^[a-zA-Z'.-]+$/);
             this.setState({ErrlastName:LastNmValid ? '' : ' Only: letters\' . -'});
             this.setState({LastName: value});
         }
@@ -72,7 +64,7 @@ class EditStudent extends React.Component
         let classNmValid=this.state.classNameValid;
         if(value!=="")
         {
-            classNmValid=value.match(/^[a-zA-Z0-9'. -]+$/);
+            classNmValid=value.match(/^[a-zA-Z0-9'.-]+$/);
             this.setState({ErrClass:classNmValid? '' : 'Only: letters\' . - 0-9'});
             this.setState({Class: value});
         }
@@ -135,7 +127,10 @@ class EditStudent extends React.Component
         const line1 = document.getElementById("address1").value;
         const line2 = document.getElementById("address2").value;
         const pin = document.getElementById("pin").value;
-        if(this.state.FirstName!=="" && this.state.LastName!==""&&this.state.Class!=="" && this.state.Division!==""&&this.state.AddressLine1!=="" && this.state.pincode!=="")
+        this.setState({studentId:id,teacherId:tid,FirstName:fname,LastName:lname,Class:classs,Division:division,
+                        AddressLine1:line1,AddressLine2:line2,pincode:pin})
+        if(this.state.FirstName!==''&& this.state.LastName!==''&&this.state.Class!==''&&
+           this.state.Division!==''&&this.state.AddressLine1!==''&& this.state.pincode!=='')
         {
            if(fetch('http://localhost:8080/updateStudent?id='+id+'&firstName='+fname+
             '&lastName='+lname+'&TeacherId='+tid+'&classs='+classs+'&division='+division+'&line1='+line1 +
@@ -176,8 +171,7 @@ class EditStudent extends React.Component
             </div> 
                 <form>
                     <InputBox id="fname" inputType="text"  placeholder="First Name"    value={this.props.studentToUpdate.firstName}    
-                              handleChanges={this.handleFirstNameChange}    Name="firstName"   error={this.state.ErrfirstName} /><br/>
-                    
+                              handleChanges={this.handleFirstNameChange}    Name="firstName"   error={this.state.ErrfirstName} /><br/>     
                     <InputBox id="lname" inputType="text"  placeholder="Last Name"     value={this.props.studentToUpdate.lastName}     
                               handleChanges={this.handleLastNameChange}     Name="lastName"    error={this.state.ErrlastName} /><br/>          
                     <InputBox id="class" inputType="text"  placeholder="Class"         value={this.props.studentToUpdate.studentClass}        

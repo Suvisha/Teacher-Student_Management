@@ -2,11 +2,13 @@
   box-sizing: border-box;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
 }
-.App {
+.App 
+{
   text-align: center;
 }
 
-.App-header {
+.App-header 
+{
   background-color: #222;
   height: 70px;
   padding: 5px;
@@ -27,11 +29,13 @@
     text-align: center;
     padding: 0px;
 }
-.App-title {
+.App-title 
+{
   font-size: 1.5em;
 }
 
-.input[type=text], select, textarea {
+.input[type=text], select, textarea 
+{
   width: 80%;
   padding: 8px;
   border: 1px solid #ccc;
@@ -72,6 +76,18 @@
   padding: 50px 0;
   text-align: center;
   margin-top: 10px;
+}
+.LoginPage
+{
+  text-align: center;
+  margin-top: 50px;
+  font-size:large;
+}
+.RegistrationPage
+{
+  text-align: center;
+  margin-top: 100px;
+  font-size:large;
 }
 @media screen and (max-width: 600px),screen and(max-width:1600px),
        screen and(max-width:320px),screen and(max-width:360px)  

@@ -6,7 +6,7 @@ import EditStudent from './EditStudent';
 import Axios from 'axios';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css' 
-import { Table } from 'react-bootstrap';
+import { Table } from 'reactstrap';
 import TeacherHome from './TeacherHome';
 import {connect} from 'react-redux'
 
@@ -93,19 +93,17 @@ class ListOfStudents extends React.Component
         if(handleBackCalled)
             return <TeacherHome></TeacherHome>
         return(    
-            <div>
-                <Table >
+            <div className="table">
+                <Table width="100%">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>First Name</th>
                             <th>Last Name</th>
-                            <th>TeacherID</th>
                             <th>class</th>
                             <th>division</th>
-                            <th>AddressLine1</th>
-                            <th>AddressLine2</th>
-                            <th>pinCode</th>
+                            <th>Address Line1</th>
+                            <th>Address Line2</th>
+                            <th>PIN Code</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -115,10 +113,8 @@ class ListOfStudents extends React.Component
                             return (
                                 <tbody>
                                     <tr key={index}>
-                                        <td>{student.studentId}</td>
                                         <td>{student.firstName}</td>
                                         <td>{student.lastName}</td>
-                                        <td>{student.teacherId}</td>
                                         <td>{student.studentClass}</td>
                                         <td>{student.division}</td>
                                         <td>{student.addressLine1}</td>
@@ -137,7 +133,6 @@ class ListOfStudents extends React.Component
         );
     }
 }
-//export default ListOfStudents;  
 const mapStateToProps = (state) => {
     return{
         teachers:state.LoginReducer[0]

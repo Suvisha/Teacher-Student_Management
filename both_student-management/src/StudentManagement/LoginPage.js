@@ -4,6 +4,8 @@ import TeacherHome from './TeacherHome';
 import {connect} from 'react-redux'
 import '../App.css';
 import './Button.css';
+import LoginImg from './LoginImg';
+import Button from './Button'
 
 class Login extends React.Component
 {
@@ -71,18 +73,20 @@ class Login extends React.Component
             return <TeacherHome />
         }
         return(
-        <div id="LoginData" className="LoginPage"> <br/>
-            <label>User Name&nbsp;: </label>
-            <input id="userName" type="text"  placeholder="User Name" required></input>
-            <br/><br/>
-            <label>Password&nbsp;&nbsp;&nbsp;: </label>
-            <input id="password" type="password" placeholder="password" required></input>
-            <br/><br/>
-            <button onClick={this.onLoginClick}>Login</button><br/><br/>
-            <label className="label"> {this.state.error} </label> <br/><br/> 
-            <a href="/"> Home </a><br/><br/>
-            <a href="/Registration">Registration</a>      
-        </div>
+            <div>     
+                <div id="LoginData" className="LoginPage"> 
+                    <LoginImg></LoginImg><br/><br/>
+                    <input id="userName" type="text"  placeholder="User Name" required></input>
+                    <br/><br/>
+                    {/* <label>Password&nbsp;&nbsp;&nbsp;: </label> */}
+                    <input id="password" type="password" placeholder="Password" required></input>
+                    <br/><br/>
+                    <Button buttonName="Login" handleOnClick={this.onLoginClick}>Login</Button><br/><br/>
+                    <label className="label"> {this.state.error} </label> <br/><br/> 
+                    <a href="/Registration">Registration</a>      
+                </div>
+            </div>
+
         )
     }  
 }
