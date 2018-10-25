@@ -2,7 +2,6 @@ package com.example.demo;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import com.example.demo.repositoriess.StudentRepositoryCustom;
 
 public class StudentRepositoryImpl implements StudentRepositoryCustom 

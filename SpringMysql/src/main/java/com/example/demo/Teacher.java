@@ -8,6 +8,8 @@ import javax.persistence.NamedStoredProcedureQueries;
 import javax.persistence.NamedStoredProcedureQuery;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Length;
+
 
 
 @Entity
@@ -30,6 +32,7 @@ public class Teacher
 	@Column(name="userName")
 	private String userName;
 	@Column(name="password")
+	@Length(min = 5, message = "*Your password must have at least 5 characters")
 	private String password;
 	
 	public int getTeacherID() {
@@ -62,16 +65,4 @@ public class Teacher
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-//	public Teacher()
-//	{
-//		
-//	}
-//	public Teacher(String firstName,String lastName,String userName,String password)
-//	{
-//		this.firstName=firstName;
-//		this.lastName=lastName;
-//		this.userName=userName;
-//		this.password=password;
-//	}
 }

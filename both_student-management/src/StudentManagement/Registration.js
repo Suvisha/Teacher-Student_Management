@@ -8,11 +8,11 @@ export default class Registration extends Component
         this.state = {
             FirstName:'',
             LastName:'',
-            userNm:'',
+            userName:'',
             passWord:'',
             msgErr:'Not registered???',
             fields:{},
-            formErrors:{FirstName:'',LastName:'',userNm:'',passWord:''},
+            formErrors:{FirstName:'',LastName:'',userName:'',passWord:''},
             formValid:false,
             data:[],            
             validRegistration: false

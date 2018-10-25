@@ -6,7 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "students")
+@Table(name = "student")
 @EntityListeners(AuditingEntityListener.class)
 
 public class Student {
